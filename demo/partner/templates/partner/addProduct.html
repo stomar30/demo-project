@@ -1,0 +1,17 @@
+{% extends 'partner/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<h2>Add Product</h2>
+<div class = "container m-5">
+<form action ="" method="POST">
+
+    {% csrf_token %}
+    {{form|crispy}}
+
+    <input type="submit" name="submit">
+</form>
+{% endblock content %}

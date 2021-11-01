@@ -1,0 +1,83 @@
+{% extends 'partner/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class = "container-fluid">
+    
+    <div class="row" style = " display: flex; min-height: 100vh;">
+        <div class = "col-3 border border-bottom-0">
+        <nav class="side-navbar">
+         <div class="sidenav-header">
+            <div class="sidenav-header-logo">
+               <a href="#" class="brand-small text-center"> 
+                  <img src="#" alt="home" style ="height:200px; width:200px;"/>
+               </a>
+            </div>
+         </div>
+         <div class="main-menu">
+            <ul id="side-main-menu" class="side-menu list-unstyled nav nav-tabs">  
+                        
+              <li class="nav-item"><a href="#" class = "nav-link active">
+                    My Products</a></li>    
+              
+              <li class="nav-item">
+                <a href="#" class = "nav-link">
+                Employee</a></li>
+
+              
+                       
+            </ul>
+         </div>
+      
+        </nav>
+        </div>
+        <div class = "col-9 border border-bottom-0">
+            <header class= "my-3 py-2" style = "background-color: #007eff">
+                <ul style = "display : flex; list-style : none; justify-content:space-between;">
+                    <li>Products List</li>
+                    <li>Welcome {{request.user}}</li>
+                </ul>
+            </header>
+            <p class="text-center" style="width: 400px;">Display section<span style = "margin-left:200px;"><a href="{% url 'addpro' %}" class="btn btn-primary m-1"> Add </a></span></p>
+
+            <table class= "table">
+                <thead>
+                    <tr>
+                        <th>Product id</th>
+                        <th>Product Name</th>
+                        <th>Product Price</th>
+                        <th>product Description</th>
+                        <th>options</th>
+                    </tr>
+                </thead>
+                <tbody>
+            {% if products %}
+
+            {% for product in products %}
+
+                
+                
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.price }}</td>
+                        <td>{{ product.description }}</td>
+                        <td><a href="{% url 'update' product.id %}" class="btn btn-primary m-1"> Update </a><td>
+                        <a href="{% url 'delete' product.id %}" class="btn btn-danger"> Delete </a>
+                    </tr>
+            
+
+            {% endfor %}
+
+            {% else %}
+                 <p>No Products </p>
+            {% endif %}
+                </tbody>
+                </table>
+        </div>
+    </div>
+    
+</div>
+
+{% endblock content %}
